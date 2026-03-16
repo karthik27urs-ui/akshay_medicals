@@ -40,7 +40,7 @@ const HeroSection = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
-          className="font-display text-5xl font-black leading-[1.1] text-primary-foreground sm:text-6xl md:text-7xl lg:text-8xl"
+          className="font-display text-3xl font-extrabold leading-[1.15] tracking-tight text-primary-foreground sm:text-4xl md:text-5xl"
         >
           Akshaya Medicals
           <motion.span
