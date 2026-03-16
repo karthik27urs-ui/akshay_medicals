@@ -18,7 +18,7 @@ const HeroSection = () => {
           alt="Akshaya Medicals & General Stores storefront in Sirsi"
           className="h-full w-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-foreground/40 via-foreground/50 to-foreground" />
+        <div className="absolute inset-0 bg-gradient-to-b from-foreground/30 via-foreground/60 to-foreground/90" />
       </motion.div>
 
       {/* Content */}
