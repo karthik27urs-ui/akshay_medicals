@@ -18,29 +18,29 @@ const HeroSection = () => {
           alt="Akshaya Medicals & General Stores storefront in Sirsi"
           className="h-full w-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-foreground/40 via-foreground/50 to-foreground" />
+        <div className="absolute inset-0 bg-gradient-to-b from-foreground/30 via-foreground/60 to-foreground/90" />
       </motion.div>
 
       {/* Content */}
       <motion.div
         style={{ opacity }}
-        className="relative z-10 flex min-h-screen flex-col items-center justify-center px-6 text-center"
+        className="relative z-10 flex min-h-screen flex-col items-center justify-end px-6 pb-20 pt-10 text-center"
       >
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="mb-6 inline-flex items-center gap-2 rounded-full border border-primary-foreground/15 bg-primary-foreground/10 px-5 py-2.5 backdrop-blur-md"
+          className="mb-4 inline-flex items-center gap-2 rounded-full border border-primary-foreground/15 bg-primary-foreground/10 px-4 py-2 backdrop-blur-md"
         >
-          <Heart className="h-4 w-4 text-secondary" fill="currentColor" />
-          <span className="font-body text-sm font-medium text-primary-foreground/90">Serving Sirsi Since Day One</span>
+          <Heart className="h-3.5 w-3.5 text-secondary" fill="currentColor" />
+          <span className="font-body text-xs font-medium tracking-wide text-primary-foreground/90">Serving Sirsi Since Day One</span>
         </motion.div>
 
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
-          className="font-display text-5xl font-black leading-[1.1] text-primary-foreground sm:text-6xl md:text-7xl lg:text-8xl"
+          className="font-display text-3xl font-extrabold leading-[1.15] tracking-tight text-primary-foreground sm:text-4xl md:text-5xl"
         >
           Akshaya Medicals
           <motion.span
@@ -57,7 +57,7 @@ const HeroSection = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.8 }}
-          className="mt-6 font-body text-lg text-primary-foreground/70"
+          className="mt-4 font-body text-sm text-primary-foreground/60"
         >
           By <span className="font-semibold text-primary-foreground">Preetipal Malgi</span>
         </motion.p>
@@ -66,28 +66,28 @@ const HeroSection = () => {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.9 }}
-          className="mt-3 inline-flex items-center gap-2 text-primary-foreground/50"
+          className="mt-2 inline-flex items-center gap-1.5 text-primary-foreground/45"
         >
-          <MapPin className="h-4 w-4" />
-          <span className="font-body text-sm">Church Rd, Opp. Government Hospital, Sirsi 581401</span>
+          <MapPin className="h-3.5 w-3.5" />
+          <span className="font-body text-xs">Church Rd, Opp. Government Hospital, Sirsi 581401</span>
         </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.1 }}
-          className="mt-8 flex flex-wrap items-center justify-center gap-4"
+          className="mt-6 flex flex-wrap items-center justify-center gap-3"
         >
           <a
             href="tel:+917947108627"
-            className="inline-flex items-center gap-2 rounded-full bg-primary px-7 py-3.5 font-display text-sm font-bold text-primary-foreground shadow-lg shadow-primary/30 transition-all hover:shadow-xl hover:shadow-primary/40 hover:brightness-110 active:scale-[0.97]"
+            className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 font-display text-xs font-bold text-primary-foreground shadow-lg shadow-primary/30 transition-all hover:shadow-xl hover:shadow-primary/40 hover:brightness-110 active:scale-[0.97]"
           >
-            <Phone className="h-4 w-4" />
+            <Phone className="h-3.5 w-3.5" />
             Call Now
           </a>
           <a
             href="#about"
-            className="inline-flex items-center gap-2 rounded-full border border-primary-foreground/20 bg-primary-foreground/10 px-7 py-3.5 font-display text-sm font-bold text-primary-foreground backdrop-blur-sm transition-all hover:bg-primary-foreground/20"
+            className="inline-flex items-center gap-2 rounded-full border border-primary-foreground/20 bg-primary-foreground/10 px-6 py-3 font-display text-xs font-bold text-primary-foreground backdrop-blur-sm transition-all hover:bg-primary-foreground/20"
           >
             Learn More
           </a>
