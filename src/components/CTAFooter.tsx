@@ -48,7 +48,7 @@ const CTAFooter = () => {
             </motion.div>
 
             <motion.a
-              href="tel:+919999999999"
+              href="tel:+917947108627"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               className="flex w-full items-center justify-center gap-3 rounded-2xl bg-primary px-6 py-4 font-display text-base font-bold text-primary-foreground shadow-lg shadow-primary/30 transition-all hover:shadow-xl hover:shadow-primary/40"
