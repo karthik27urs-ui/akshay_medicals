@@ -80,14 +80,14 @@ const HeroSection = () => {
         >
           <a
             href="tel:+917947108627"
-            className="inline-flex items-center gap-2 rounded-full bg-primary px-7 py-3.5 font-display text-sm font-bold text-primary-foreground shadow-lg shadow-primary/30 transition-all hover:shadow-xl hover:shadow-primary/40 hover:brightness-110 active:scale-[0.97]"
+            className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 font-display text-xs font-bold text-primary-foreground shadow-lg shadow-primary/30 transition-all hover:shadow-xl hover:shadow-primary/40 hover:brightness-110 active:scale-[0.97]"
           >
-            <Phone className="h-4 w-4" />
+            <Phone className="h-3.5 w-3.5" />
             Call Now
           </a>
           <a
             href="#about"
-            className="inline-flex items-center gap-2 rounded-full border border-primary-foreground/20 bg-primary-foreground/10 px-7 py-3.5 font-display text-sm font-bold text-primary-foreground backdrop-blur-sm transition-all hover:bg-primary-foreground/20"
+            className="inline-flex items-center gap-2 rounded-full border border-primary-foreground/20 bg-primary-foreground/10 px-6 py-3 font-display text-xs font-bold text-primary-foreground backdrop-blur-sm transition-all hover:bg-primary-foreground/20"
           >
             Learn More
           </a>
