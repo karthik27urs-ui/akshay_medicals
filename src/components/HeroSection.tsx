@@ -57,7 +57,7 @@ const HeroSection = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.8 }}
-          className="mt-6 font-body text-lg text-primary-foreground/70"
+          className="mt-4 font-body text-sm text-primary-foreground/60"
         >
           By <span className="font-semibold text-primary-foreground">Preetipal Malgi</span>
         </motion.p>
