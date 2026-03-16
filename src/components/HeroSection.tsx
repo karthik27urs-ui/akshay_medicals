@@ -30,10 +30,10 @@ const HeroSection = () => {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="mb-6 inline-flex items-center gap-2 rounded-full border border-primary-foreground/15 bg-primary-foreground/10 px-5 py-2.5 backdrop-blur-md"
+          className="mb-4 inline-flex items-center gap-2 rounded-full border border-primary-foreground/15 bg-primary-foreground/10 px-4 py-2 backdrop-blur-md"
         >
-          <Heart className="h-4 w-4 text-secondary" fill="currentColor" />
-          <span className="font-body text-sm font-medium text-primary-foreground/90">Serving Sirsi Since Day One</span>
+          <Heart className="h-3.5 w-3.5 text-secondary" fill="currentColor" />
+          <span className="font-body text-xs font-medium tracking-wide text-primary-foreground/90">Serving Sirsi Since Day One</span>
         </motion.div>
 
         <motion.h1
