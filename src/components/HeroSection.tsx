@@ -66,10 +66,10 @@ const HeroSection = () => {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.9 }}
-          className="mt-3 inline-flex items-center gap-2 text-primary-foreground/50"
+          className="mt-2 inline-flex items-center gap-1.5 text-primary-foreground/45"
         >
-          <MapPin className="h-4 w-4" />
-          <span className="font-body text-sm">Church Rd, Opp. Government Hospital, Sirsi 581401</span>
+          <MapPin className="h-3.5 w-3.5" />
+          <span className="font-body text-xs">Church Rd, Opp. Government Hospital, Sirsi 581401</span>
         </motion.div>
 
         <motion.div
