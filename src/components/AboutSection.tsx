@@ -35,8 +35,7 @@ const AboutSection = () => {
             </h2>
             <p className="mx-auto mt-4 max-w-2xl font-body text-lg text-muted-foreground">
               Akshay Medicals And General Stores provides you the best range of industrial chemicals, 
-              vitamin powder, acetone solvent, organic capsules, dental instruments &amp; ECG machine 
-              with effective &amp; timely delivery.
+              vitamin powder, acetone solvent, organic capsules, dental instruments &amp; ECG machine
             </p>
           </div>
         </ScrollReveal>
