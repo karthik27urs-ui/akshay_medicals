@@ -2,7 +2,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import heroImg from "@/assets/hero-storefront.jpg";
 import { MapPin, ChevronDown, Phone } from "lucide-react";
 import { useRef } from "react";
-import storeLogo from "@/assets/store-logo.png";
+import BrandLogo from "./BrandLogo";
 
 const HeroSection = () => {
   const ref = useRef<HTMLDivElement>(null);
