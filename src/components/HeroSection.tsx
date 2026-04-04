@@ -1,7 +1,8 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import heroImg from "@/assets/hero-storefront.jpg";
-import { MapPin, Heart, ChevronDown, Phone } from "lucide-react";
+import { MapPin, ChevronDown, Phone } from "lucide-react";
 import { useRef } from "react";
+import storeLogo from "@/assets/store-logo.png";
 
 const HeroSection = () => {
   const ref = useRef<HTMLDivElement>(null);
@@ -27,13 +28,23 @@ const HeroSection = () => {
         className="relative z-10 flex min-h-screen flex-col items-center justify-end px-6 pb-20 pt-10 text-center"
       >
         <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.7, delay: 0.1 }}
+          className="mb-5"
+        >
+          <img src={storeLogo} alt="Akshaya Medicals Logo" className="mx-auto h-20 w-20 rounded-2xl object-cover shadow-lg shadow-black/30 sm:h-24 sm:w-24" />
+        </motion.div>
+
+        <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
           className="mb-4 inline-flex items-center gap-2 rounded-full border border-primary-foreground/15 bg-primary-foreground/10 px-4 py-2 backdrop-blur-md"
         >
-          <Heart className="h-3.5 w-3.5 text-secondary" fill="currentColor" />
-          <span className="font-body text-xs font-medium tracking-wide text-primary-foreground/90">Serving Sirsi Since Day One</span>
+          <span className="font-body text-xs font-medium tracking-wide text-secondary">Since 1989</span>
+          <span className="h-3 w-px bg-primary-foreground/20" />
+          <span className="font-body text-xs font-medium tracking-wide text-primary-foreground/90">Pharmacy with Aim</span>
         </motion.div>
 
         <motion.h1
