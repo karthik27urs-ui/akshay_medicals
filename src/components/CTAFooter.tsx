@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import ScrollReveal from "./ScrollReveal";
 import { MapPin, Phone, Clock } from "lucide-react";
-import storeLogo from "@/assets/store-logo.png";
+import BrandLogo from "./BrandLogo";
 
 const CTAFooter = () => {
   return (
