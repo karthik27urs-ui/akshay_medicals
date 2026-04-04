@@ -62,7 +62,9 @@ const CTAFooter = () => {
 
         <ScrollReveal delay={0.3}>
           <div className="mt-20 border-t border-primary-foreground/10 pt-8 text-center">
-            <p className="font-body text-xs text-primary-foreground/40">
+            <img src={storeLogo} alt="Akshaya Medicals Logo" className="mx-auto mb-3 h-12 w-12 rounded-xl object-cover opacity-60" />
+            <p className="font-body text-xs text-primary-foreground/50 font-medium">Since 1989 · Pharmacy with Aim</p>
+            <p className="mt-1 font-body text-xs text-primary-foreground/40">
               © {new Date().getFullYear()} Akshaya Medicals &amp; General Stores · Owned by Preetipal Malgi · Sirsi, Karnataka
             </p>
           </div>
