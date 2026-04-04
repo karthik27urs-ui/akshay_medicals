@@ -2,7 +2,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import heroImg from "@/assets/hero-storefront.jpg";
 import { MapPin, ChevronDown, Phone } from "lucide-react";
 import { useRef } from "react";
-import storeLogo from "@/assets/store-logo.png";
+import BrandLogo from "./BrandLogo";
 
 const HeroSection = () => {
   const ref = useRef<HTMLDivElement>(null);
@@ -33,7 +33,8 @@ const HeroSection = () => {
           transition={{ duration: 0.7, delay: 0.1 }}
           className="mb-5"
         >
-          <img src={storeLogo} alt="Akshaya Medicals Logo" className="mx-auto h-20 w-20 rounded-2xl object-cover shadow-lg shadow-black/30 sm:h-24 sm:w-24" />
+          <BrandLogo size={72} className="mx-auto drop-shadow-lg sm:hidden" />
+          <BrandLogo size={88} className="mx-auto hidden drop-shadow-lg sm:block" />
         </motion.div>
 
         <motion.div
