@@ -11,20 +11,42 @@ const BrandLogo = ({ className = "", size = 64 }: { className?: string; size?: n
     <path
       d="M35 5h30v30h30v30H65v30H35V65H5V35h30V5z"
       fill="hsl(var(--primary))"
-      opacity="0.9"
     />
-    {/* Circle behind tree */}
-    <circle cx="50" cy="50" r="22" fill="white" />
     {/* Tree trunk */}
-    <rect x="47" y="56" width="6" height="14" rx="2" fill="hsl(var(--primary))" />
-    {/* Tree canopy - layered leaves */}
-    <ellipse cx="50" cy="46" rx="14" ry="12" fill="hsl(var(--primary))" />
-    <ellipse cx="50" cy="40" rx="10" ry="9" fill="hsl(var(--primary))" />
-    <ellipse cx="50" cy="35" rx="7" ry="7" fill="hsl(var(--primary))" />
-    {/* Leaf vein details */}
-    <line x1="50" y1="30" x2="50" y2="56" stroke="white" strokeWidth="1.5" opacity="0.5" />
-    <line x1="50" y1="38" x2="42" y2="48" stroke="white" strokeWidth="1" opacity="0.4" />
-    <line x1="50" y1="38" x2="58" y2="48" stroke="white" strokeWidth="1" opacity="0.4" />
+    <line x1="50" y1="72" x2="50" y2="48" stroke="white" strokeWidth="2.5" strokeLinecap="round" />
+    {/* Spreading branches - fan pattern like the real logo */}
+    {/* Center top */}
+    <line x1="50" y1="48" x2="50" y2="28" stroke="white" strokeWidth="1.8" strokeLinecap="round" />
+    {/* Layer 1 - slight spread */}
+    <line x1="50" y1="50" x2="46" y2="30" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
+    <line x1="50" y1="50" x2="54" y2="30" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
+    {/* Layer 2 - more spread */}
+    <line x1="50" y1="52" x2="41" y2="32" stroke="white" strokeWidth="1.4" strokeLinecap="round" />
+    <line x1="50" y1="52" x2="59" y2="32" stroke="white" strokeWidth="1.4" strokeLinecap="round" />
+    {/* Layer 3 - wider */}
+    <line x1="50" y1="54" x2="36" y2="35" stroke="white" strokeWidth="1.3" strokeLinecap="round" />
+    <line x1="50" y1="54" x2="64" y2="35" stroke="white" strokeWidth="1.3" strokeLinecap="round" />
+    {/* Layer 4 - widest */}
+    <line x1="50" y1="56" x2="32" y2="39" stroke="white" strokeWidth="1.2" strokeLinecap="round" />
+    <line x1="50" y1="56" x2="68" y2="39" stroke="white" strokeWidth="1.2" strokeLinecap="round" />
+    {/* Layer 5 - outermost */}
+    <line x1="50" y1="58" x2="29" y2="44" stroke="white" strokeWidth="1.1" strokeLinecap="round" />
+    <line x1="50" y1="58" x2="71" y2="44" stroke="white" strokeWidth="1.1" strokeLinecap="round" />
+    {/* Small leaf tips at the ends */}
+    <circle cx="50" cy="27" r="1.5" fill="white" />
+    <circle cx="46" cy="29" r="1.3" fill="white" />
+    <circle cx="54" cy="29" r="1.3" fill="white" />
+    <circle cx="41" cy="31" r="1.3" fill="white" />
+    <circle cx="59" cy="31" r="1.3" fill="white" />
+    <circle cx="36" cy="34" r="1.2" fill="white" />
+    <circle cx="64" cy="34" r="1.2" fill="white" />
+    <circle cx="32" cy="38" r="1.2" fill="white" />
+    <circle cx="68" cy="38" r="1.2" fill="white" />
+    <circle cx="29" cy="43" r="1.1" fill="white" />
+    <circle cx="71" cy="43" r="1.1" fill="white" />
+    {/* Root lines at base */}
+    <line x1="50" y1="72" x2="44" y2="76" stroke="white" strokeWidth="1.2" strokeLinecap="round" />
+    <line x1="50" y1="72" x2="56" y2="76" stroke="white" strokeWidth="1.2" strokeLinecap="round" />
   </svg>
 );
 

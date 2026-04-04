@@ -25,17 +25,21 @@ const HeroSection = () => {
       {/* Content */}
       <motion.div
         style={{ opacity }}
-        className="relative z-10 flex min-h-screen flex-col items-center justify-end px-6 pb-20 pt-10 text-center"
+        className="relative z-10 flex min-h-screen flex-col items-center px-6 pb-20 pt-10 text-center"
       >
+        {/* Logo at top - positioned where the glass window area is */}
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.7, delay: 0.1 }}
-          className="mb-5"
+          className="mt-6 sm:mt-10"
         >
-          <BrandLogo size={72} className="mx-auto drop-shadow-lg sm:hidden" />
-          <BrandLogo size={88} className="mx-auto hidden drop-shadow-lg sm:block" />
+          <BrandLogo size={56} className="mx-auto drop-shadow-lg sm:hidden" />
+          <BrandLogo size={72} className="mx-auto hidden drop-shadow-lg sm:block" />
         </motion.div>
+
+        {/* Spacer to push text content to bottom */}
+        <div className="flex-1" />
 
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
