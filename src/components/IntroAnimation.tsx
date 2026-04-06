@@ -48,7 +48,7 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
         <img
           src={brandLogo}
           alt="Akshaya Medicals logo"
-          className="h-40 w-40 rounded-full drop-shadow-2xl sm:h-48 sm:w-48"
+          className="h-48 w-56 rounded-full drop-shadow-2xl sm:h-56 sm:w-64"
         />
       </motion.a>
     </motion.div>
