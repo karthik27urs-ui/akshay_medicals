@@ -25,7 +25,7 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
 
   return (
     <AnimatePresence>
-      {phase !== "done" && (
+      {(
         <motion.div
           className="fixed inset-0 z-[9999] flex items-center justify-center bg-foreground"
           animate={phase === "move" ? { opacity: 0 } : { opacity: 1 }}
