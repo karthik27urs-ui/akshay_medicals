@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import ScrollReveal from "./ScrollReveal";
 import { MapPin, Phone, Clock } from "lucide-react";
-import BrandLogo from "./BrandLogo";
+import brandLogo from "@/assets/brand-logo.png";
 
 const CTAFooter = () => {
   return (
@@ -62,7 +62,7 @@ const CTAFooter = () => {
 
         <ScrollReveal delay={0.3}>
           <div className="mt-20 border-t border-primary-foreground/10 pt-8 text-center">
-            <BrandLogo size={40} className="mx-auto mb-3 opacity-60" />
+            <img src={brandLogo} alt="Akshaya Medicals logo" className="mx-auto mb-3 h-10 w-10 rounded-full opacity-60" />
             <p className="font-body text-xs text-primary-foreground/50 font-medium">Since 1989 · Pharmacy with Aim</p>
             <p className="mt-1 font-body text-xs text-primary-foreground/40">
               © {new Date().getFullYear()} Akshaya Medicals &amp; General Stores · Owned by Preetipal Malgi · Sirsi, Karnataka
