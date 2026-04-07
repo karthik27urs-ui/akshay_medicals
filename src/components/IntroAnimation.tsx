@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import brandLogo from "@/assets/brand-logo.png";
 import heroImg from "@/assets/hero-storefront.jpg";
@@ -8,19 +8,30 @@ interface IntroAnimationProps {
 }
 
 const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
-  const [phase, setPhase] = useState<"hold" | "move">("hold");
+  const [phase, setPhase] = useState<"hold" | "move" | "done">("hold");
 
   useEffect(() => {
-    const timer = setTimeout(() => setPhase("move"), 2500);
-    return () => clearTimeout(timer);
+    const holdTimer = setTimeout(() => setPhase("move"), 2800);
+    return () => clearTimeout(holdTimer);
   }, []);
+
+  useEffect(() => {
+    if (phase === "move") {
+      const doneTimer = setTimeout(() => {
+        setPhase("done");
+        onComplete();
+      }, 1200);
+      return () => clearTimeout(doneTimer);
+    }
+  }, [phase, onComplete]);
+
+  if (phase === "done") return null;
 
   return (
     <motion.div
       className="fixed inset-0 z-[9999]"
       animate={phase === "move" ? { opacity: 0 } : { opacity: 1 }}
-      transition={{ duration: 0.5, ease: "easeInOut", delay: phase === "move" ? 0.6 : 0 }}
-      onAnimationComplete={() => phase === "move" && onComplete()}
+      transition={{ duration: 0.6, ease: "easeInOut", delay: phase === "move" ? 0.4 : 0 }}
     >
       {/* Background storefront image */}
       <img
@@ -28,35 +39,93 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
         alt=""
         className="absolute inset-0 h-full w-full object-cover"
       />
-      <div className="absolute inset-0 bg-foreground/40" />
+      <div className="absolute inset-0 bg-foreground/50" />
 
-      {/* Centered logo that shrinks to top-left */}
+      {/* Centered logo with glowing ring */}
       <motion.a
         href="/"
         className="absolute left-1/2 top-1/2 block"
-        initial={{ x: "-50%", y: "-50%", scale: 0.8, opacity: 0 }}
+        initial={{ x: "-50%", y: "-50%", scale: 0.7, opacity: 0 }}
         animate={
           phase === "hold"
-            ? { x: "-50%", y: "-50%", scale: 1, opacity: 0.85, rotate: [0, 2, -2, 0] }
-            : { x: "0%", y: "0%", scale: 0.35, opacity: 1, left: 24, top: 24 }
+            ? { x: "-50%", y: "-50%", scale: 1, opacity: 1 }
+            : { x: "-50%", y: "-50%", scale: 0.3, opacity: 0 }
         }
         transition={{
-          duration: phase === "hold" ? 1 : 0.8,
+          duration: phase === "hold" ? 0.9 : 0.8,
           ease: [0.4, 0, 0.2, 1],
-          rotate: { duration: 1.5, repeat: 1, ease: "easeInOut" },
         }}
       >
-        <motion.img
-          src={brandLogo}
-          alt="Akshaya Medicals logo"
-          className="h-56 w-56 rounded-full border-2 border-white/30 sm:h-64 sm:w-64"
+        {/* Outer glowing ring */}
+        <motion.div
+          className="relative flex items-center justify-center"
           animate={
             phase === "hold"
-              ? { boxShadow: ["0 0 30px rgba(255,255,255,0.2), 0 0 60px rgba(255,255,255,0.1)", "0 0 50px rgba(255,255,255,0.4), 0 0 100px rgba(255,255,255,0.2)", "0 0 30px rgba(255,255,255,0.2), 0 0 60px rgba(255,255,255,0.1)"] }
+              ? {
+                  rotate: [0, 360],
+                }
               : {}
           }
-          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-        />
+          transition={{
+            rotate: { duration: 8, repeat: Infinity, ease: "linear" },
+          }}
+        >
+          {/* Glow ring */}
+          <motion.div
+            className="absolute rounded-full"
+            style={{
+              width: "calc(100% + 24px)",
+              height: "calc(100% + 24px)",
+              border: "2px solid rgba(255,255,255,0.3)",
+            }}
+            animate={
+              phase === "hold"
+                ? {
+                    boxShadow: [
+                      "0 0 20px rgba(255,255,255,0.15), 0 0 40px rgba(255,255,255,0.08), inset 0 0 20px rgba(255,255,255,0.05)",
+                      "0 0 40px rgba(255,255,255,0.35), 0 0 80px rgba(255,255,255,0.15), inset 0 0 30px rgba(255,255,255,0.1)",
+                      "0 0 20px rgba(255,255,255,0.15), 0 0 40px rgba(255,255,255,0.08), inset 0 0 20px rgba(255,255,255,0.05)",
+                    ],
+                    borderColor: [
+                      "rgba(255,255,255,0.2)",
+                      "rgba(255,255,255,0.5)",
+                      "rgba(255,255,255,0.2)",
+                    ],
+                  }
+                : {}
+            }
+            transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+          />
+
+          {/* Second outer ring for depth */}
+          <motion.div
+            className="absolute rounded-full"
+            style={{
+              width: "calc(100% + 40px)",
+              height: "calc(100% + 40px)",
+              border: "1px solid rgba(255,255,255,0.1)",
+            }}
+            animate={
+              phase === "hold"
+                ? {
+                    boxShadow: [
+                      "0 0 30px rgba(255,255,255,0.05)",
+                      "0 0 60px rgba(255,255,255,0.12)",
+                      "0 0 30px rgba(255,255,255,0.05)",
+                    ],
+                  }
+                : {}
+            }
+            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+          />
+
+          {/* Logo image */}
+          <img
+            src={brandLogo}
+            alt="Akshaya Medicals logo"
+            className="relative z-10 h-52 w-52 rounded-full object-cover sm:h-60 sm:w-60"
+          />
+        </motion.div>
       </motion.a>
     </motion.div>
   );
