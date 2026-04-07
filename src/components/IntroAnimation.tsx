@@ -34,21 +34,28 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
       <motion.a
         href="/"
         className="absolute left-1/2 top-1/2 block"
-        initial={{ x: "-50%", y: "-50%", scale: 1, opacity: 0 }}
+        initial={{ x: "-50%", y: "-50%", scale: 0.8, opacity: 0 }}
         animate={
           phase === "hold"
-            ? { x: "-50%", y: "-50%", scale: 1, opacity: 0.8 }
-            : { x: "0%", y: "0%", scale: 0.4, opacity: 1, left: 24, top: 24 }
+            ? { x: "-50%", y: "-50%", scale: 1, opacity: 0.85, rotate: [0, 2, -2, 0] }
+            : { x: "0%", y: "0%", scale: 0.35, opacity: 1, left: 24, top: 24 }
         }
         transition={{
-          duration: phase === "hold" ? 0.7 : 0.8,
+          duration: phase === "hold" ? 1 : 0.8,
           ease: [0.4, 0, 0.2, 1],
+          rotate: { duration: 1.5, repeat: 1, ease: "easeInOut" },
         }}
       >
-        <img
+        <motion.img
           src={brandLogo}
           alt="Akshaya Medicals logo"
-          className="h-56 w-56 rounded-full border-2 border-white/30 shadow-[0_0_40px_rgba(255,255,255,0.3),0_0_80px_rgba(255,255,255,0.15)] sm:h-64 sm:w-64"
+          className="h-56 w-56 rounded-full border-2 border-white/30 sm:h-64 sm:w-64"
+          animate={
+            phase === "hold"
+              ? { boxShadow: ["0 0 30px rgba(255,255,255,0.2), 0 0 60px rgba(255,255,255,0.1)", "0 0 50px rgba(255,255,255,0.4), 0 0 100px rgba(255,255,255,0.2)", "0 0 30px rgba(255,255,255,0.2), 0 0 60px rgba(255,255,255,0.1)"] }
+              : {}
+          }
+          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
         />
       </motion.a>
     </motion.div>
