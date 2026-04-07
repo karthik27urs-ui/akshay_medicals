@@ -30,8 +30,12 @@ const HeroSection = () => {
         transition={{ duration: 0.6, delay: 0.1 }}
         className="absolute left-4 top-4 z-20 sm:left-6 sm:top-6"
       >
-        <img src={brandLogo} alt="Akshaya Medicals logo" className="h-16 w-16 rounded-full border border-white/25 shadow-[0_0_20px_rgba(255,255,255,0.2)] sm:hidden" />
-        <img src={brandLogo} alt="Akshaya Medicals logo" className="hidden h-24 w-24 rounded-full border border-white/25 shadow-[0_0_20px_rgba(255,255,255,0.2)] sm:block" />
+        <div className="h-16 w-[4.5rem] overflow-hidden rounded-full border border-white/25 shadow-[0_0_20px_rgba(255,255,255,0.2)] sm:hidden">
+          <img src={brandLogo} alt="Akshaya Medicals logo" className="h-full w-full object-cover" />
+        </div>
+        <div className="hidden h-24 w-[6.75rem] overflow-hidden rounded-full border border-white/25 shadow-[0_0_20px_rgba(255,255,255,0.2)] sm:block">
+          <img src={brandLogo} alt="Akshaya Medicals logo" className="h-full w-full object-cover" />
+        </div>
       </motion.div>
 
       <motion.div
