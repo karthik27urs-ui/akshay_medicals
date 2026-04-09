@@ -31,15 +31,15 @@ const HeroSection = () => {
       >
         {/* Glowing border wrapper */}
         <div
-          className="rounded-full p-px"
+          className="rounded-full p-[2px]"
           style={{
-            background: "linear-gradient(135deg, rgba(255,255,255,0.35), rgba(255,255,255,0.08), rgba(255,255,255,0.28))",
-            boxShadow: "0 0 6px rgba(255,255,255,0.14), 0 0 14px rgba(255,255,255,0.04)",
+            background: "linear-gradient(135deg, rgba(120,180,255,0.5), rgba(255,255,255,0.6), rgba(100,160,255,0.45), rgba(255,255,255,0.5))",
+            boxShadow: "0 0 8px rgba(120,180,255,0.35), 0 0 20px rgba(100,160,255,0.2), 0 0 40px rgba(80,140,255,0.1), 0 0 4px rgba(255,255,255,0.3)",
           }}
         >
           {/* Mobile */}
-          <div className="h-[4.5rem] w-[4.5rem] overflow-hidden rounded-full sm:hidden">
-            <img src={brandLogo} alt="Akshaya Medicals logo" className="h-full w-full object-cover" />
+          <div className="h-[4.5rem] w-[4.5rem] overflow-hidden rounded-full">
+            <img src={brandLogo} alt="Akshaya Medicals logo" className="h-full w-full object-cover sm:hidden" />
           </div>
           {/* Desktop */}
           <div className="hidden h-[6rem] w-[6rem] overflow-hidden rounded-full sm:block">
