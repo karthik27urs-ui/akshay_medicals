@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import brandLogo from "@/assets/brand-logo.png";
 import heroImg from "@/assets/hero-storefront.jpg";
 
@@ -17,6 +17,19 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
     return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3); };
   }, [onComplete]);
 
+  // Pre-compute particle positions to avoid re-renders
+  const particles = useMemo(() => 
+    Array.from({ length: 12 }, (_, i) => ({
+      size: 2 + Math.random() * 4,
+      left: 15 + Math.random() * 70,
+      top: 15 + Math.random() * 70,
+      dy: -40 - Math.random() * 60,
+      dx: (Math.random() - 0.5) * 50,
+      dur: 2.5 + Math.random() * 2,
+      delay: 0.2 + i * 0.2,
+    })), []
+  );
+
   return (
     <motion.div
       className="fixed inset-0 z-[9999] flex items-center justify-center"
@@ -26,86 +39,145 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
       {/* Background */}
       <img src={heroImg} alt="" className="absolute inset-0 h-full w-full object-cover" />
 
-      {/* Cinematic dark overlay with vignette */}
+      {/* Cinematic vignette */}
       <div
         className="absolute inset-0"
         style={{
-          background:
-            "radial-gradient(ellipse at center, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.8) 100%)",
+          background: "radial-gradient(ellipse at center, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.85) 100%)",
         }}
       />
 
-      {/* Soft breathing ambient light behind logo */}
+      {/* Breathing ambient glow */}
       <motion.div
         className="absolute rounded-full"
         style={{
-          width: 600,
-          height: 600,
-          background: "radial-gradient(circle, rgba(255,255,255,0.06) 0%, transparent 70%)",
+          width: 700,
+          height: 700,
+          background: "radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 65%)",
         }}
-        animate={{ scale: [1, 1.2, 1], opacity: [0.5, 1, 0.5] }}
-        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+        animate={{ scale: [1, 1.3, 1], opacity: [0.4, 1, 0.4] }}
+        transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
+      />
+
+      {/* Secondary warm glow */}
+      <motion.div
+        className="absolute rounded-full"
+        style={{
+          width: 500,
+          height: 500,
+          background: "radial-gradient(circle, rgba(200,170,100,0.06) 0%, transparent 60%)",
+        }}
+        animate={{ scale: [1.1, 0.9, 1.1], opacity: [0.3, 0.7, 0.3] }}
+        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
       />
 
       {/* Logo group */}
       <motion.a
         href="/"
         className="relative z-10 flex items-center justify-center"
-        initial={{ scale: 0.5, opacity: 0, filter: "blur(16px)" }}
+        initial={{ scale: 0.4, opacity: 0, filter: "blur(20px)" }}
         animate={
           phase === "enter" || phase === "hold"
             ? { scale: 1, opacity: 1, filter: "blur(0px)" }
-            : { scale: 0.15, opacity: 0, filter: "blur(8px)", y: -280, x: -400 }
+            : { scale: 0.12, opacity: 0, filter: "blur(10px)", y: -300, x: -420 }
         }
         transition={{
-          duration: phase === "enter" ? 0.8 : phase === "exit" ? 1.1 : 0.3,
+          duration: phase === "enter" ? 0.9 : phase === "exit" ? 1.1 : 0.3,
           ease: [0.22, 1, 0.36, 1],
         }}
       >
-        {/* Single glowing ring - tightly around logo */}
-        <motion.div
-          className="absolute rounded-full"
-          style={{
-            width: 300,
-            height: 300,
-            border: "2px solid rgba(255,255,255,0.25)",
-          }}
-          animate={{
-            boxShadow: [
-              "0 0 15px rgba(255,255,255,0.1), 0 0 40px rgba(255,255,255,0.05), inset 0 0 15px rgba(255,255,255,0.03)",
-              "0 0 30px rgba(255,255,255,0.25), 0 0 70px rgba(255,255,255,0.1), inset 0 0 25px rgba(255,255,255,0.06)",
-              "0 0 15px rgba(255,255,255,0.1), 0 0 40px rgba(255,255,255,0.05), inset 0 0 15px rgba(255,255,255,0.03)",
-            ],
-            borderColor: [
-              "rgba(255,255,255,0.2)",
-              "rgba(255,255,255,0.45)",
-              "rgba(255,255,255,0.2)",
-            ],
-          }}
-          transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-        />
-
-        {/* Rotating accent arc */}
+        {/* Outer pulsing glow ring */}
         <motion.div
           className="absolute rounded-full"
           style={{
             width: 310,
             height: 310,
-            border: "1.5px solid transparent",
-            borderTopColor: "rgba(255,255,255,0.4)",
-            borderRightColor: "rgba(255,255,255,0.15)",
+            border: "1.5px solid rgba(255,255,255,0.15)",
           }}
-          animate={{ rotate: 360 }}
-          transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
+          animate={{
+            boxShadow: [
+              "0 0 20px rgba(255,255,255,0.08), 0 0 60px rgba(255,255,255,0.03)",
+              "0 0 40px rgba(255,255,255,0.2), 0 0 80px rgba(255,255,255,0.08)",
+              "0 0 20px rgba(255,255,255,0.08), 0 0 60px rgba(255,255,255,0.03)",
+            ],
+            borderColor: [
+              "rgba(255,255,255,0.15)",
+              "rgba(255,255,255,0.4)",
+              "rgba(255,255,255,0.15)",
+            ],
+            scale: [1, 1.03, 1],
+          }}
+          transition={{ duration: 2.8, repeat: Infinity, ease: "easeInOut" }}
         />
 
-        {/* Logo image - 80% opacity, perfectly circular */}
+        {/* Inner tight glow ring */}
+        <motion.div
+          className="absolute rounded-full"
+          style={{
+            width: 290,
+            height: 290,
+            border: "1px solid rgba(255,255,255,0.1)",
+          }}
+          animate={{
+            borderColor: [
+              "rgba(255,255,255,0.08)",
+              "rgba(255,255,255,0.25)",
+              "rgba(255,255,255,0.08)",
+            ],
+          }}
+          transition={{ duration: 2.8, repeat: Infinity, ease: "easeInOut", delay: 0.3 }}
+        />
+
+        {/* Rotating accent arc 1 */}
+        <motion.div
+          className="absolute rounded-full"
+          style={{
+            width: 320,
+            height: 320,
+            border: "1.5px solid transparent",
+            borderTopColor: "rgba(255,255,255,0.35)",
+            borderRightColor: "rgba(255,255,255,0.1)",
+          }}
+          animate={{ rotate: 360 }}
+          transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+        />
+
+        {/* Rotating accent arc 2 (counter) */}
+        <motion.div
+          className="absolute rounded-full"
+          style={{
+            width: 330,
+            height: 330,
+            border: "1px solid transparent",
+            borderBottomColor: "rgba(255,255,255,0.2)",
+            borderLeftColor: "rgba(255,255,255,0.05)",
+          }}
+          animate={{ rotate: -360 }}
+          transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
+        />
+
+        {/* Shimmer sweep across logo */}
+        <motion.div
+          className="absolute overflow-hidden rounded-full"
+          style={{ width: 280, height: 280 }}
+        >
+          <motion.div
+            className="absolute inset-0"
+            style={{
+              background: "linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.15) 50%, transparent 60%)",
+            }}
+            animate={{ x: [-300, 300] }}
+            transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut", delay: 1, repeatDelay: 1.5 }}
+          />
+        </motion.div>
+
+        {/* Logo image */}
         <div
           className="relative overflow-hidden rounded-full"
           style={{
             width: 280,
             height: 280,
-            boxShadow: "0 0 50px rgba(0,0,0,0.5), 0 0 20px rgba(255,255,255,0.08)",
+            boxShadow: "0 0 60px rgba(0,0,0,0.6), 0 0 25px rgba(255,255,255,0.1)",
           }}
         >
           <img
@@ -118,33 +190,50 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
       </motion.a>
 
       {/* Floating particles */}
-      {[...Array(6)].map((_, i) => (
+      {particles.map((p, i) => (
         <motion.div
           key={i}
-          className="absolute rounded-full bg-white/20"
+          className="absolute rounded-full"
           style={{
-            width: 3 + Math.random() * 3,
-            height: 3 + Math.random() * 3,
-            left: `${20 + Math.random() * 60}%`,
-            top: `${20 + Math.random() * 60}%`,
+            width: p.size,
+            height: p.size,
+            left: `${p.left}%`,
+            top: `${p.top}%`,
+            background: i % 3 === 0
+              ? "rgba(200,170,100,0.4)"
+              : "rgba(255,255,255,0.3)",
           }}
           initial={{ opacity: 0 }}
           animate={
             phase === "hold"
-              ? {
-                  opacity: [0, 0.6, 0],
-                  y: [0, -30 - Math.random() * 40],
-                  x: [0, (Math.random() - 0.5) * 30],
-                }
+              ? { opacity: [0, 0.8, 0], y: [0, p.dy], x: [0, p.dx] }
               : { opacity: 0 }
           }
-          transition={{
-            duration: 2 + Math.random() * 2,
-            delay: 0.3 + i * 0.3,
-            ease: "easeOut",
-          }}
+          transition={{ duration: p.dur, delay: p.delay, ease: "easeOut" }}
         />
       ))}
+
+      {/* Light rays */}
+      {phase === "hold" && (
+        <>
+          {[0, 60, 120, 180, 240, 300].map((deg) => (
+            <motion.div
+              key={deg}
+              className="absolute"
+              style={{
+                width: 1,
+                height: 180,
+                background: "linear-gradient(to top, rgba(255,255,255,0.08), transparent)",
+                transformOrigin: "bottom center",
+                rotate: `${deg}deg`,
+              }}
+              initial={{ opacity: 0, scaleY: 0 }}
+              animate={{ opacity: [0, 0.6, 0], scaleY: [0, 1, 0.5] }}
+              transition={{ duration: 2, delay: 0.5, ease: "easeOut" }}
+            />
+          ))}
+        </>
+      )}
 
       {/* Tagline */}
       <motion.p
@@ -162,7 +251,7 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
         PHARMACY WITH AIM
       </motion.p>
 
-      {/* "Since 1989" */}
+      {/* Since 1989 */}
       <motion.span
         className="absolute bottom-10 left-1/2 -translate-x-1/2 font-body text-[10px] tracking-[0.2em] text-primary-foreground/30"
         initial={{ opacity: 0 }}
