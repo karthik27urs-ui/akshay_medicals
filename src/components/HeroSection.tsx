@@ -31,10 +31,10 @@ const HeroSection = () => {
       >
         {/* Glowing border wrapper */}
         <div
-          className="rounded-full p-[1.5px] sm:p-[1.5px]"
+          className="rounded-full p-px"
           style={{
-            background: "linear-gradient(135deg, rgba(255,255,255,0.45), rgba(255,255,255,0.1), rgba(255,255,255,0.35))",
-            boxShadow: "0 0 10px rgba(255,255,255,0.2), 0 0 25px rgba(255,255,255,0.06)",
+            background: "linear-gradient(135deg, rgba(255,255,255,0.35), rgba(255,255,255,0.08), rgba(255,255,255,0.28))",
+            boxShadow: "0 0 6px rgba(255,255,255,0.14), 0 0 14px rgba(255,255,255,0.04)",
           }}
         >
           {/* Mobile */}
