@@ -22,19 +22,29 @@ const HeroSection = () => {
         <div className="absolute inset-0 bg-gradient-to-b from-foreground/30 via-foreground/60 to-foreground/90" />
       </motion.div>
 
-      {/* Content */}
-      {/* Brand logo - top left */}
+      {/* Brand logo - top left with glow */}
       <motion.div
         initial={{ opacity: 0, x: -20 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.6, delay: 0.1 }}
         className="absolute left-4 top-4 z-20 sm:left-6 sm:top-6"
       >
-        <div className="h-16 w-[4.5rem] overflow-hidden rounded-full border border-white/25 shadow-[0_0_20px_rgba(255,255,255,0.2)] sm:hidden">
-          <img src={brandLogo} alt="Akshaya Medicals logo" className="h-full w-full object-cover" />
-        </div>
-        <div className="hidden h-24 w-[6.75rem] overflow-hidden rounded-full border border-white/25 shadow-[0_0_20px_rgba(255,255,255,0.2)] sm:block">
-          <img src={brandLogo} alt="Akshaya Medicals logo" className="h-full w-full object-cover" />
+        {/* Glowing border wrapper */}
+        <div
+          className="rounded-full p-[2px] sm:p-[2.5px]"
+          style={{
+            background: "linear-gradient(135deg, rgba(255,255,255,0.5), rgba(255,255,255,0.15), rgba(255,255,255,0.4))",
+            boxShadow: "0 0 18px rgba(255,255,255,0.25), 0 0 40px rgba(255,255,255,0.08)",
+          }}
+        >
+          {/* Mobile */}
+          <div className="h-[4.5rem] w-[4.5rem] overflow-hidden rounded-full sm:hidden">
+            <img src={brandLogo} alt="Akshaya Medicals logo" className="h-full w-full object-cover" />
+          </div>
+          {/* Desktop */}
+          <div className="hidden h-[6rem] w-[6rem] overflow-hidden rounded-full sm:block">
+            <img src={brandLogo} alt="Akshaya Medicals logo" className="h-full w-full object-cover" />
+          </div>
         </div>
       </motion.div>
 
