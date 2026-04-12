@@ -29,20 +29,15 @@ const HeroSection = () => {
         transition={{ duration: 0.6, delay: 0.1 }}
         className="absolute left-4 top-4 z-20 sm:left-6 sm:top-6"
       >
-        {/* Glowing border wrapper */}
         <div
-          className="rounded-full p-[2px]"
+          className="h-14 w-14 rounded-full sm:h-[4.5rem] sm:w-[4.5rem]"
           style={{
-            background: "linear-gradient(135deg, rgba(120,180,255,0.5), rgba(255,255,255,0.6), rgba(100,160,255,0.45), rgba(255,255,255,0.5))",
-            boxShadow: "0 0 8px rgba(120,180,255,0.35), 0 0 20px rgba(100,160,255,0.2), 0 0 40px rgba(80,140,255,0.1), 0 0 4px rgba(255,255,255,0.3)",
+            padding: "1.5px",
+            background: "linear-gradient(135deg, rgba(255,255,255,0.7), rgba(200,220,255,0.5), rgba(255,255,255,0.6))",
+            boxShadow: "0 0 6px rgba(255,255,255,0.3), 0 0 14px rgba(180,210,255,0.15)",
           }}
         >
-          {/* Mobile */}
-          <div className="h-[4.5rem] w-[4.5rem] overflow-hidden rounded-full">
-            <img src={brandLogo} alt="Akshaya Medicals logo" className="h-full w-full object-cover sm:hidden" />
-          </div>
-          {/* Desktop */}
-          <div className="hidden h-[6rem] w-[6rem] overflow-hidden rounded-full sm:block">
+          <div className="h-full w-full overflow-hidden rounded-full bg-foreground/20">
             <img src={brandLogo} alt="Akshaya Medicals logo" className="h-full w-full object-cover" />
           </div>
         </div>
