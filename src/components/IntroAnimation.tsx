@@ -1,14 +1,18 @@
 import { motion } from "framer-motion";
 import { useState, useEffect, useMemo } from "react";
-import brandLogo from "@/assets/brand-logo.png";
 import heroImg from "@/assets/hero-storefront.jpg";
+import GlowingLogo from "./GlowingLogo";
 
 interface IntroAnimationProps {
   onComplete: () => void;
 }
 
+const rayAngles = [0, 60, 120, 180, 240, 300];
+
 const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
   const [phase, setPhase] = useState<"enter" | "hold" | "exit">("enter");
+  const isHolding = phase === "hold";
+  const isExiting = phase === "exit";
 
   useEffect(() => {
     const t1 = setTimeout(() => setPhase("hold"), 800);
@@ -19,70 +23,64 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
 
   // Pre-compute particle positions to avoid re-renders
   const particles = useMemo(() => 
-    Array.from({ length: 12 }, (_, i) => ({
+    Array.from({ length: 14 }, (_, i) => ({
       size: 2 + Math.random() * 4,
-      left: 15 + Math.random() * 70,
-      top: 15 + Math.random() * 70,
-      dy: -40 - Math.random() * 60,
-      dx: (Math.random() - 0.5) * 50,
-      dur: 2.5 + Math.random() * 2,
-      delay: 0.2 + i * 0.2,
+      left: 16 + Math.random() * 68,
+      top: 18 + Math.random() * 64,
+      dy: -45 - Math.random() * 70,
+      dx: (Math.random() - 0.5) * 60,
+      dur: 2.6 + Math.random() * 2.1,
+      delay: 0.15 + i * 0.16,
     })), []
   );
 
   return (
     <motion.div
-      className="fixed inset-0 z-[9999] flex items-center justify-center"
-      animate={phase === "exit" ? { opacity: 0 } : { opacity: 1 }}
+      className="fixed inset-0 z-[9999] flex items-center justify-center overflow-hidden"
+      animate={isExiting ? { opacity: 0 } : { opacity: 1 }}
       transition={{ duration: 0.9, ease: "easeInOut" }}
     >
       {/* Background */}
       <img src={heroImg} alt="" className="absolute inset-0 h-full w-full object-cover" />
 
       {/* Cinematic vignette */}
-      <div
-        className="absolute inset-0"
-        style={{
-          background: "radial-gradient(ellipse at center, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.85) 100%)",
-        }}
-      />
+      <div className="absolute inset-0 intro-vignette" />
 
       {/* Breathing ambient glow */}
       <motion.div
-        className="absolute rounded-full"
-        style={{
-          width: 700,
-          height: 700,
-          background: "radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 65%)",
-        }}
-        animate={{ scale: [1, 1.3, 1], opacity: [0.4, 1, 0.4] }}
-        transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute rounded-full intro-aura"
+        style={{ width: 780, height: 780 }}
+        animate={{ scale: [1, 1.24, 1], opacity: [0.38, 0.9, 0.38] }}
+        transition={{ duration: 3.8, repeat: Infinity, ease: "easeInOut" }}
       />
 
       {/* Secondary warm glow */}
       <motion.div
-        className="absolute rounded-full"
-        style={{
-          width: 500,
-          height: 500,
-          background: "radial-gradient(circle, rgba(200,170,100,0.06) 0%, transparent 60%)",
-        }}
-        animate={{ scale: [1.1, 0.9, 1.1], opacity: [0.3, 0.7, 0.3] }}
-        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+        className="absolute rounded-full intro-secondary-aura"
+        style={{ width: 540, height: 540 }}
+        animate={{ scale: [1.08, 0.92, 1.08], opacity: [0.25, 0.62, 0.25] }}
+        transition={{ duration: 4.4, repeat: Infinity, ease: "easeInOut", delay: 0.4 }}
+      />
+
+      <motion.div
+        className="absolute rounded-full intro-orbit-ring blur-[2px]"
+        style={{ width: 420, height: 420 }}
+        animate={{ rotate: 360, scale: [1, 1.03, 1] }}
+        transition={{ duration: 16, repeat: Infinity, ease: "linear" }}
       />
 
       {/* Logo group */}
       <motion.a
         href="/"
         className="relative z-10 flex items-center justify-center"
-        initial={{ scale: 0.4, opacity: 0, filter: "blur(20px)" }}
+        initial={{ scale: 0.45, opacity: 0, filter: "blur(18px)" }}
         animate={
-          phase === "enter" || phase === "hold"
-            ? { scale: 1, opacity: 1, filter: "blur(0px)" }
-            : { scale: 0.12, opacity: 0, filter: "blur(10px)", y: -300, x: -420 }
+          isExiting
+            ? { scale: 0.24, opacity: 0.84, filter: "blur(0px)", y: -300, x: -430 }
+            : { scale: 1, opacity: 1, filter: "blur(0px)", y: 0, x: 0 }
         }
         transition={{
-          duration: phase === "enter" ? 0.9 : phase === "exit" ? 1.1 : 0.3,
+          duration: phase === "enter" ? 0.95 : isExiting ? 1.05 : 0.35,
           ease: [0.22, 1, 0.36, 1],
         }}
       >
@@ -90,20 +88,20 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
         <motion.div
           className="absolute rounded-full"
           style={{
-            width: 310,
-            height: 310,
-            border: "1.5px solid rgba(255,255,255,0.15)",
+            width: 346,
+            height: 346,
+            border: "1.5px solid hsl(var(--logo-halo-white) / 0.18)",
           }}
           animate={{
             boxShadow: [
-              "0 0 20px rgba(255,255,255,0.08), 0 0 60px rgba(255,255,255,0.03)",
-              "0 0 40px rgba(255,255,255,0.2), 0 0 80px rgba(255,255,255,0.08)",
-              "0 0 20px rgba(255,255,255,0.08), 0 0 60px rgba(255,255,255,0.03)",
+              "0 0 18px hsl(var(--logo-halo-white) / 0.08), 0 0 58px hsl(var(--logo-halo-blue) / 0.05)",
+              "0 0 38px hsl(var(--logo-halo-white) / 0.18), 0 0 92px hsl(var(--logo-halo-blue) / 0.1)",
+              "0 0 18px hsl(var(--logo-halo-white) / 0.08), 0 0 58px hsl(var(--logo-halo-blue) / 0.05)",
             ],
             borderColor: [
-              "rgba(255,255,255,0.15)",
-              "rgba(255,255,255,0.4)",
-              "rgba(255,255,255,0.15)",
+              "hsl(var(--logo-halo-white) / 0.18)",
+              "hsl(var(--logo-halo-white) / 0.36)",
+              "hsl(var(--logo-halo-white) / 0.18)",
             ],
             scale: [1, 1.03, 1],
           }}
@@ -114,29 +112,29 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
         <motion.div
           className="absolute rounded-full"
           style={{
-            width: 290,
-            height: 290,
-            border: "1px solid rgba(255,255,255,0.1)",
+            width: 326,
+            height: 326,
+            border: "1px solid hsl(var(--logo-halo-white) / 0.12)",
           }}
           animate={{
             borderColor: [
-              "rgba(255,255,255,0.08)",
-              "rgba(255,255,255,0.25)",
-              "rgba(255,255,255,0.08)",
+              "hsl(var(--logo-halo-white) / 0.1)",
+              "hsl(var(--logo-halo-blue) / 0.26)",
+              "hsl(var(--logo-halo-white) / 0.1)",
             ],
           }}
-          transition={{ duration: 2.8, repeat: Infinity, ease: "easeInOut", delay: 0.3 }}
+          transition={{ duration: 2.8, repeat: Infinity, ease: "easeInOut", delay: 0.2 }}
         />
 
         {/* Rotating accent arc 1 */}
         <motion.div
           className="absolute rounded-full"
           style={{
-            width: 320,
-            height: 320,
+            width: 360,
+            height: 360,
             border: "1.5px solid transparent",
-            borderTopColor: "rgba(255,255,255,0.35)",
-            borderRightColor: "rgba(255,255,255,0.1)",
+            borderTopColor: "hsl(var(--logo-halo-white) / 0.42)",
+            borderRightColor: "hsl(var(--logo-halo-blue) / 0.18)",
           }}
           animate={{ rotate: 360 }}
           transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
@@ -146,11 +144,11 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
         <motion.div
           className="absolute rounded-full"
           style={{
-            width: 330,
-            height: 330,
+            width: 374,
+            height: 374,
             border: "1px solid transparent",
-            borderBottomColor: "rgba(255,255,255,0.2)",
-            borderLeftColor: "rgba(255,255,255,0.05)",
+            borderBottomColor: "hsl(var(--logo-halo-white) / 0.24)",
+            borderLeftColor: "hsl(var(--logo-halo-blue) / 0.12)",
           }}
           animate={{ rotate: -360 }}
           transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
@@ -159,34 +157,26 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
         {/* Shimmer sweep across logo */}
         <motion.div
           className="absolute overflow-hidden rounded-full"
-          style={{ width: 280, height: 280 }}
+          style={{ width: 308, height: 308 }}
         >
           <motion.div
-            className="absolute inset-0"
-            style={{
-              background: "linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.15) 50%, transparent 60%)",
-            }}
-            animate={{ x: [-300, 300] }}
-            transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut", delay: 1, repeatDelay: 1.5 }}
+            className="absolute inset-0 intro-shimmer"
+            animate={{ x: ["-120%", "120%"] }}
+            transition={{ duration: 2.8, repeat: Infinity, ease: "easeInOut", delay: 0.9, repeatDelay: 1.2 }}
           />
         </motion.div>
 
         {/* Logo image */}
-        <div
-          className="relative overflow-hidden rounded-full"
-          style={{
-            width: 280,
-            height: 280,
-            boxShadow: "0 0 60px rgba(0,0,0,0.6), 0 0 25px rgba(255,255,255,0.1)",
-          }}
+        <motion.div
+          animate={
+            isExiting
+              ? { scale: 1.02, rotate: 0 }
+              : { scale: [1, 1.025, 1], rotate: [0, 1.2, 0, -1.2, 0] }
+          }
+          transition={{ duration: 4.6, repeat: isExiting ? 0 : Infinity, ease: "easeInOut" }}
         >
-          <img
-            src={brandLogo}
-            alt="Akshaya Medicals logo"
-            className="h-full w-full object-cover"
-            style={{ opacity: 0.8 }}
-          />
-        </div>
+          <GlowingLogo variant="intro" />
+        </motion.div>
       </motion.a>
 
       {/* Floating particles */}
@@ -200,36 +190,38 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
             left: `${p.left}%`,
             top: `${p.top}%`,
             background: i % 3 === 0
-              ? "rgba(200,170,100,0.4)"
-              : "rgba(255,255,255,0.3)",
+              ? "hsl(var(--secondary) / 0.38)"
+              : "hsl(var(--logo-halo-white) / 0.34)",
+            boxShadow: i % 3 === 0
+              ? "0 0 12px hsl(var(--secondary) / 0.24)"
+              : "0 0 10px hsl(var(--logo-halo-white) / 0.2)",
           }}
-          initial={{ opacity: 0 }}
+          initial={{ opacity: 0, scale: 0.7 }}
           animate={
-            phase === "hold"
-              ? { opacity: [0, 0.8, 0], y: [0, p.dy], x: [0, p.dx] }
-              : { opacity: 0 }
+            isHolding
+              ? { opacity: [0, 0.9, 0], scale: [0.7, 1.05, 0.8], y: [0, p.dy], x: [0, p.dx] }
+              : { opacity: 0, scale: 0.7 }
           }
           transition={{ duration: p.dur, delay: p.delay, ease: "easeOut" }}
         />
       ))}
 
       {/* Light rays */}
-      {phase === "hold" && (
+      {isHolding && (
         <>
-          {[0, 60, 120, 180, 240, 300].map((deg) => (
+          {rayAngles.map((deg) => (
             <motion.div
               key={deg}
-              className="absolute"
+              className="absolute intro-ray"
               style={{
                 width: 1,
-                height: 180,
-                background: "linear-gradient(to top, rgba(255,255,255,0.08), transparent)",
+                height: 190,
                 transformOrigin: "bottom center",
                 rotate: `${deg}deg`,
               }}
               initial={{ opacity: 0, scaleY: 0 }}
-              animate={{ opacity: [0, 0.6, 0], scaleY: [0, 1, 0.5] }}
-              transition={{ duration: 2, delay: 0.5, ease: "easeOut" }}
+              animate={{ opacity: [0, 0.7, 0], scaleY: [0, 1, 0.55] }}
+              transition={{ duration: 2.1, delay: 0.45, ease: "easeOut" }}
             />
           ))}
         </>
@@ -237,26 +229,26 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
 
       {/* Tagline */}
       <motion.p
-        className="absolute bottom-16 left-1/2 -translate-x-1/2 whitespace-nowrap font-display text-xs font-medium tracking-[0.35em] text-primary-foreground/50 sm:text-sm"
+        className="absolute bottom-16 left-1/2 -translate-x-1/2 whitespace-nowrap font-display text-xs font-medium tracking-[0.35em] text-primary-foreground/60 sm:text-sm"
         initial={{ opacity: 0, y: 15 }}
         animate={
-          phase === "hold"
+          isHolding
             ? { opacity: 1, y: 0 }
-            : phase === "exit"
+            : isExiting
               ? { opacity: 0, y: -10 }
               : { opacity: 0, y: 15 }
         }
-        transition={{ duration: 0.7, ease: "easeOut", delay: phase === "hold" ? 0.2 : 0 }}
+        transition={{ duration: 0.7, ease: "easeOut", delay: isHolding ? 0.2 : 0 }}
       >
         PHARMACY WITH AIM
       </motion.p>
 
       {/* Since 1989 */}
       <motion.span
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 font-body text-[10px] tracking-[0.2em] text-primary-foreground/30"
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 font-body text-[10px] tracking-[0.2em] text-primary-foreground/35"
         initial={{ opacity: 0 }}
-        animate={phase === "hold" ? { opacity: 1 } : { opacity: 0 }}
-        transition={{ duration: 0.5, delay: phase === "hold" ? 0.5 : 0 }}
+        animate={isHolding ? { opacity: 1 } : { opacity: 0 }}
+        transition={{ duration: 0.5, delay: isHolding ? 0.5 : 0 }}
       >
         SINCE 1989
       </motion.span>

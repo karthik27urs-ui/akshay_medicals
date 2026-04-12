@@ -2,7 +2,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import heroImg from "@/assets/hero-storefront.jpg";
 import { MapPin, ChevronDown, Phone } from "lucide-react";
 import { useRef, useState, useEffect } from "react";
-import brandLogo from "@/assets/brand-logo.png";
+import GlowingLogo from "@/components/GlowingLogo";
 
 const TypingText = ({ text, className }: { text: string; className?: string }) => {
   const [displayed, setDisplayed] = useState("");
@@ -48,18 +48,7 @@ const HeroSection = () => {
         transition={{ duration: 0.6, delay: 0.1 }}
         className="absolute left-4 top-4 z-20 sm:left-6 sm:top-6"
       >
-        <div
-          className="h-14 w-14 rounded-full sm:h-[4.5rem] sm:w-[4.5rem]"
-          style={{
-            padding: "1px",
-            background: "linear-gradient(135deg, rgba(255,255,255,0.55), rgba(220,235,255,0.4), rgba(255,255,255,0.5))",
-            boxShadow: "0 0 4px rgba(255,255,255,0.2), 0 0 10px rgba(200,220,255,0.1)",
-          }}
-        >
-          <div className="h-full w-full overflow-hidden rounded-full">
-            <img src={brandLogo} alt="Akshaya Medicals logo" className="h-full w-full scale-110 object-cover" />
-          </div>
-        </div>
+        <GlowingLogo variant="header" />
       </motion.div>
 
       <motion.div
