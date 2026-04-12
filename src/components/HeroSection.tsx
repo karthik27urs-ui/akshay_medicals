@@ -4,6 +4,25 @@ import { MapPin, ChevronDown, Phone } from "lucide-react";
 import { useRef, useState, useEffect } from "react";
 import brandLogo from "@/assets/brand-logo.png";
 
+const TypingText = ({ text, className }: { text: string; className?: string }) => {
+  const [displayed, setDisplayed] = useState("");
+  useEffect(() => {
+    let i = 0;
+    const timer = setInterval(() => {
+      i++;
+      setDisplayed(text.slice(0, i));
+      if (i >= text.length) clearInterval(timer);
+    }, 80);
+    return () => clearInterval(timer);
+  }, [text]);
+  return (
+    <span className={className}>
+      {displayed}
+      <motion.span animate={{ opacity: [1, 0] }} transition={{ repeat: Infinity, duration: 0.6 }} className="ml-px">|</motion.span>
+    </span>
+  );
+};
+
 const HeroSection = () => {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
