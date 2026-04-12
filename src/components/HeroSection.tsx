@@ -1,7 +1,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import heroImg from "@/assets/hero-storefront.jpg";
 import { MapPin, ChevronDown, Phone } from "lucide-react";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import brandLogo from "@/assets/brand-logo.png";
 
 const HeroSection = () => {
@@ -32,13 +32,13 @@ const HeroSection = () => {
         <div
           className="h-14 w-14 rounded-full sm:h-[4.5rem] sm:w-[4.5rem]"
           style={{
-            padding: "1.5px",
-            background: "linear-gradient(135deg, rgba(255,255,255,0.7), rgba(200,220,255,0.5), rgba(255,255,255,0.6))",
-            boxShadow: "0 0 6px rgba(255,255,255,0.3), 0 0 14px rgba(180,210,255,0.15)",
+            padding: "1px",
+            background: "linear-gradient(135deg, rgba(255,255,255,0.55), rgba(220,235,255,0.4), rgba(255,255,255,0.5))",
+            boxShadow: "0 0 4px rgba(255,255,255,0.2), 0 0 10px rgba(200,220,255,0.1)",
           }}
         >
-          <div className="h-full w-full overflow-hidden rounded-full bg-foreground/20">
-            <img src={brandLogo} alt="Akshaya Medicals logo" className="h-full w-full object-cover" />
+          <div className="h-full w-full overflow-hidden rounded-full">
+            <img src={brandLogo} alt="Akshaya Medicals logo" className="h-full w-full scale-110 object-cover" />
           </div>
         </div>
       </motion.div>
@@ -56,7 +56,7 @@ const HeroSection = () => {
         >
           <span className="font-body text-xs font-medium tracking-wide text-secondary">Since 1989</span>
           <span className="h-3 w-px bg-primary-foreground/20" />
-          <span className="font-body text-xs font-medium tracking-wide text-primary-foreground/90">Pharmacy with Aim</span>
+          <TypingText text="Pharmacy with Aim" className="font-body text-xs font-medium tracking-wide text-primary-foreground/90" />
         </motion.div>
 
         <motion.h1
